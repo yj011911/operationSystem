@@ -63,6 +63,7 @@ void getResource(){
 
 }
 
+//释放资源
 void releaseResource(){
 
 
@@ -85,7 +86,7 @@ void releaseResource(){
 void init_processes(int processes_num, int num_instructions) {
     // 随机生成进程的优先级和指令集合
     for (int i = 0; i < processes_num; i++) {
-        struct PCB pcb = {i, rand() % 10, READY, 0, num_instructions};
+        struct PCB pcb = {i, rand() % 10, CREATE, 0, num_instructions};
         for (int j = 0; j < num_instructions; j++) {
 
             if (j == 0){
@@ -104,6 +105,7 @@ void init_processes(int processes_num, int num_instructions) {
                 pcb.instructions[j] = &instr2;
             }
         }
+        pcb.state = READY;
         processes.push_back(pcb);
     }
 }
