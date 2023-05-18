@@ -134,9 +134,13 @@ void run_process(struct PCB* pcb) {
             return;
         }
 
-        if (i>=TIME_SLICE || pcb->pc >= pcb->num_instructions) { // 时间片结束，切换到下一个进程
+        if (i>=TIME_SLICE ) { // 时间片结束，切换到下一个进程
             pcb->state = READY;
-            running_process = -1;
+            break;
+        }
+
+        if (pcb->pc >= pcb->num_instructions){
+            pcb->state = TERMINATED;
             break;
         }
     }
